@@ -2,14 +2,13 @@ import streamlit as st
 import subprocess
 import datetime
 
-# =============================
+
 # CONFIG
-# =============================
+
 OLLAMA_MODEL = "llama3:8b"
 
-# =============================
-# OLLAMA CALL (WINDOWS SAFE)
-# =============================
+# OLLAMA CALL 
+
 def call_llm(prompt):
     try:
         result = subprocess.run(
@@ -23,9 +22,9 @@ def call_llm(prompt):
     except Exception:
         return "I’m here with you. Please tell me more."
 
-# =============================
+
 # CRITICAL CARE AGENT
-# =============================
+
 def critical_care_agent(text):
     phrases = [
         "suicide", "kill myself", "end my life",
@@ -46,9 +45,9 @@ def care_message():
         "If you want, we can slow your breathing together."
     )
 
-# =============================
+
 # WELL-BEING SCORE AGENT (FIXED)
-# =============================
+
 def wellbeing_score_agent(text):
     score = 100
     t = text.lower()
@@ -87,9 +86,9 @@ def wellbeing_label(score):
         return "Strained"
     return "Critical"
 
-# =============================
+
 # SUPPORT STRATEGY (WHO-ALIGNED)
-# =============================
+
 def support_strategy(score):
     if score >= 75:
         return (
@@ -118,9 +117,9 @@ def support_strategy(score):
 
     return care_message()
 
-# =============================
+
 # DAILY CHECK-IN DASHBOARD
-# =============================
+
 def daily_checkin():
     st.subheader("🗓️ Daily Well-Being Check-In")
 
@@ -139,9 +138,9 @@ def daily_checkin():
         "It does not diagnose mental health conditions."
     )
 
-# =============================
+
 # REFLECTIVE AI SUPPORT (OLLAMA)
-# =============================
+
 def reflective_support(user_input):
     prompt = f"""
 You are MindCare, a WHO-aligned wellbeing support assistant.
@@ -158,9 +157,9 @@ User message:
 """
     return call_llm(prompt)
 
-# =============================
+
 # STREAMLIT UI
-# =============================
+
 st.set_page_config(page_title="MindCare", page_icon="🧠")
 st.title("🧠 MindCare")
 st.caption("WHO-aligned mental well-being screening & daily support")
@@ -209,3 +208,4 @@ if user_input:
 st.markdown("---")
 st.caption("⚠️ MindCare supports well-being awareness, not medical diagnosis")
 st.caption(datetime.datetime.now().strftime("Session Time: %H:%M:%S"))
+
